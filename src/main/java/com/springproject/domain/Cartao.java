@@ -22,6 +22,10 @@ public class Cartao implements Serializable{
 	private String senha;
 	private Conta conta;
 	
+	public Cartao() {
+		
+	}
+	
 	public Cartao(Integer id, Integer numero, Date vencimento, String nomeCliente, Integer cod, String senha, Conta conta) {
 		super();
 		this.id = id;

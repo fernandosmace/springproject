@@ -23,6 +23,10 @@ public class Fatura implements Serializable{
 	private double total;
 	private Cartao cartao;
 	
+	public Fatura() {
+		
+	}
+	
 	public Fatura(Integer id, Date dataVencimento, Date dataPagamento, double juros, boolean estado, double total,
 			Cartao cartao) {
 		super();

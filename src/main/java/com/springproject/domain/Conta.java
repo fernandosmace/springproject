@@ -20,6 +20,10 @@ public class Conta implements Serializable{
 	private Categoria categoria;
 	private Cliente cliente;
 	
+	public Conta() {
+		
+	}
+	
 	public Conta(Integer id, Integer numero, double saldo, boolean estado, Categoria categoria, Cliente cliente) {
 		super();
 		this.id = id;
