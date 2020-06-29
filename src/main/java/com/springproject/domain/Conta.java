@@ -13,14 +13,14 @@ public class Conta implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private int numero;
+	private Integer id;
+	private Integer numero;
 	private double saldo;
 	private boolean estado;
 	private Categoria categoria;
 	private Cliente cliente;
 	
-	public Conta(int id, int numero, double saldo, boolean estado, Categoria categoria, Cliente cliente) {
+	public Conta(Integer id, Integer numero, double saldo, boolean estado, Categoria categoria, Cliente cliente) {
 		super();
 		this.id = id;
 		this.numero = numero;
@@ -30,19 +30,19 @@ public class Conta implements Serializable{
 		this.cliente = cliente;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
@@ -80,8 +80,8 @@ public class Conta implements Serializable{
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
 		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
 		result = prime * result + (estado ? 1231 : 1237);

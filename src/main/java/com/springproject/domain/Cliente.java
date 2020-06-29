@@ -13,13 +13,13 @@ public class Cliente implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String nome;
 	private String telefone;
 	private String email;
 	private Endereco endereco;
 	
-	public Cliente(int id, String nome, String telefone, String email, Endereco endereco) {
+	public Cliente(Integer id, String nome, String telefone, String email, Endereco endereco) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -28,10 +28,10 @@ public class Cliente implements Serializable{
 		this.endereco = endereco;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -61,8 +61,8 @@ public class Cliente implements Serializable{
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + id;

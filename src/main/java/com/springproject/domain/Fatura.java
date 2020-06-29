@@ -14,7 +14,7 @@ public class Fatura implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	private Date dataVencimento;
 	private Date dataPagamento;
@@ -23,7 +23,7 @@ public class Fatura implements Serializable{
 	private double total;
 	private Cartao cartao;
 	
-	public Fatura(int id, Date dataVencimento, Date dataPagamento, double juros, boolean estado, double total,
+	public Fatura(Integer id, Date dataVencimento, Date dataPagamento, double juros, boolean estado, double total,
 			Cartao cartao) {
 		super();
 		this.id = id;
@@ -35,11 +35,11 @@ public class Fatura implements Serializable{
 		this.cartao = cartao;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -93,8 +93,8 @@ public class Fatura implements Serializable{
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((cartao == null) ? 0 : cartao.hashCode());
 		result = prime * result + ((dataPagamento == null) ? 0 : dataPagamento.hashCode());
 		result = prime * result + ((dataVencimento == null) ? 0 : dataVencimento.hashCode());

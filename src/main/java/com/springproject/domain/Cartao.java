@@ -14,15 +14,15 @@ public class Cartao implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private int numero;
+	private Integer id;
+	private Integer numero;
 	private Date vencimento;
 	private String nomeCliente;
-	private int cod;
+	private Integer cod;
 	private String senha;
 	private Conta conta;
 	
-	public Cartao(int id, int numero, Date vencimento, String nomeCliente, int cod, String senha, Conta conta) {
+	public Cartao(Integer id, Integer numero, Date vencimento, String nomeCliente, Integer cod, String senha, Conta conta) {
 		super();
 		this.id = id;
 		this.numero = numero;
@@ -33,19 +33,19 @@ public class Cartao implements Serializable{
 		this.conta = conta;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
@@ -65,11 +65,11 @@ public class Cartao implements Serializable{
 		this.nomeCliente = nomeCliente;
 	}
 
-	public int getCod() {
+	public Integer getCod() {
 		return cod;
 	}
 
-	public void setCod(int cod) {
+	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
 
@@ -91,8 +91,8 @@ public class Cartao implements Serializable{
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + cod;
 		result = prime * result + ((conta == null) ? 0 : conta.hashCode());
 		result = prime * result + id;
