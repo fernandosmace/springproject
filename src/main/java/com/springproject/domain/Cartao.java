@@ -1,14 +1,23 @@
 package com.springproject.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="CARTAO")
 public class Cartao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -20,7 +29,14 @@ public class Cartao implements Serializable{
 	private String nomeCliente;
 	private Integer cod;
 	private String senha;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="conta_id", nullable=false)
 	private Conta conta;
+	
+	@OneToMany(mappedBy="cartao")
+	private List<Fatura> faturas = new ArrayList<>();
 	
 	public Cartao() {
 		
@@ -84,7 +100,7 @@ public class Cartao implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	
 	public Conta getConta() {
 		return conta;
 	}
@@ -93,17 +109,19 @@ public class Cartao implements Serializable{
 		this.conta = conta;
 	}
 
+	public List<Fatura> getFaturas() {
+		return faturas;
+	}
+
+	public void setFaturas(List<Fatura> faturas) {
+		this.faturas = faturas;
+	}
+
 	@Override
 	public int hashCode() {
-		final Integer prime = 31;
-		Integer result = 1;
-		result = prime * result + cod;
-		result = prime * result + ((conta == null) ? 0 : conta.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((nomeCliente == null) ? 0 : nomeCliente.hashCode());
-		result = prime * result + numero;
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
-		result = prime * result + ((vencimento == null) ? 0 : vencimento.hashCode());
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -116,31 +134,10 @@ public class Cartao implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Cartao other = (Cartao) obj;
-		if (cod != other.cod)
-			return false;
-		if (conta == null) {
-			if (other.conta != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!conta.equals(other.conta))
-			return false;
-		if (id != other.id)
-			return false;
-		if (nomeCliente == null) {
-			if (other.nomeCliente != null)
-				return false;
-		} else if (!nomeCliente.equals(other.nomeCliente))
-			return false;
-		if (numero != other.numero)
-			return false;
-		if (senha == null) {
-			if (other.senha != null)
-				return false;
-		} else if (!senha.equals(other.senha))
-			return false;
-		if (vencimento == null) {
-			if (other.vencimento != null)
-				return false;
-		} else if (!vencimento.equals(other.vencimento))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}	

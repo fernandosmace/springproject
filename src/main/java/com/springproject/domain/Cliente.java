@@ -1,13 +1,22 @@
 package com.springproject.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="CLIENTE")
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -17,19 +26,24 @@ public class Cliente implements Serializable{
 	private String nome;
 	private String telefone;
 	private String email;
-	private Endereco endereco;
+	
+	@OneToMany
+	private List<Endereco> enderecos = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToOne(mappedBy="cliente", cascade = CascadeType.ALL)
+	private Conta conta;
 	
 	public Cliente() {
 		
 	}
 	
-	public Cliente(Integer id, String nome, String telefone, String email, Endereco endereco) {
+	public Cliente(Integer id, String nome, String telefone, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
-		this.endereco = endereco;
 	}
 	
 	public Integer getId() {
@@ -56,22 +70,28 @@ public class Cliente implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Endereco getEndereco() {
-		return endereco;
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
 	}
 
 	@Override
 	public int hashCode() {
-		final Integer prime = 31;
-		Integer result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -84,30 +104,11 @@ public class Cliente implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		if (email == null) {
-			if (other.email != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
-				return false;
-		} else if (!endereco.equals(other.endereco))
-			return false;
-		if (id != other.id)
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (telefone == null) {
-			if (other.telefone != null)
-				return false;
-		} else if (!telefone.equals(other.telefone))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
-	
 }

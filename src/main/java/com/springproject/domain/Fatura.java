@@ -7,8 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="FATURA")
 public class Fatura implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -21,6 +27,10 @@ public class Fatura implements Serializable{
 	private double juros;
 	private boolean estado;
 	private double total;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="cartao_id", nullable=false)
 	private Cartao cartao;
 	
 	public Fatura() {
@@ -36,7 +46,7 @@ public class Fatura implements Serializable{
 		this.juros = juros;
 		this.estado = estado;
 		this.total = total;
-		this.cartao = cartao;
+		this.setCartao(cartao);
 	}
 
 	public Integer getId() {
@@ -97,18 +107,9 @@ public class Fatura implements Serializable{
 
 	@Override
 	public int hashCode() {
-		final Integer prime = 31;
-		Integer result = 1;
-		result = prime * result + ((cartao == null) ? 0 : cartao.hashCode());
-		result = prime * result + ((dataPagamento == null) ? 0 : dataPagamento.hashCode());
-		result = prime * result + ((dataVencimento == null) ? 0 : dataVencimento.hashCode());
-		result = prime * result + (estado ? 1231 : 1237);
-		result = prime * result + id;
-		long temp;
-		temp = Double.doubleToLongBits(juros);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(total);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -121,28 +122,10 @@ public class Fatura implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Fatura other = (Fatura) obj;
-		if (cartao == null) {
-			if (other.cartao != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!cartao.equals(other.cartao))
-			return false;
-		if (dataPagamento == null) {
-			if (other.dataPagamento != null)
-				return false;
-		} else if (!dataPagamento.equals(other.dataPagamento))
-			return false;
-		if (dataVencimento == null) {
-			if (other.dataVencimento != null)
-				return false;
-		} else if (!dataVencimento.equals(other.dataVencimento))
-			return false;
-		if (estado != other.estado)
-			return false;
-		if (id != other.id)
-			return false;
-		if (Double.doubleToLongBits(juros) != Double.doubleToLongBits(other.juros))
-			return false;
-		if (Double.doubleToLongBits(total) != Double.doubleToLongBits(other.total))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}	

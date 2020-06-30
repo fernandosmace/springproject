@@ -1,13 +1,20 @@
 package com.springproject.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="CATEGORIA")
 public class Categoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -15,6 +22,10 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="categoria")
+	private List<Conta> contas = new ArrayList<>();
 	
 	public Categoria() {
 		
@@ -42,12 +53,19 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 	}
 
+	public List<Conta> getContas() {
+		return contas;
+	}
+
+	public void setContas(List<Conta> contas) {
+		this.contas = contas;
+	}
+
 	@Override
 	public int hashCode() {
-		final Integer prime = 31;
-		Integer result = 1;
-		result = prime * result + id;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -60,13 +78,14 @@ public class Categoria implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Categoria other = (Categoria) obj;
-		if (id != other.id)
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+
+	
+	
 }
